@@ -1,0 +1,33 @@
+{
+    "name": "node-red-contrib-nagios-nsca-send",
+    "version": "0.0.14",
+    "description": "Coming soon",
+    "main": "nagios-nsca-send.js",
+    "scripts": {
+        "test": "echo \"no test specified\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/and-rom/node-red-contrib-nagios-nsca-send.git"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "keywords": [
+        "node-red",
+        "nagios",
+        "nsca"
+    ],
+    "node-red": {
+        "version": ">=2.0.0",
+        "nodes": {
+            "nagios-nsca-send": "nagios-nsca-send.js"
+        }
+    },
+    "author": "AndRom",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/and-rom/node-red-contrib-nagios-nsca-send/issues"
+    },
+    "homepage": "https://github.com/and-rom/node-red-contrib-nagios-nsca-send"
+}

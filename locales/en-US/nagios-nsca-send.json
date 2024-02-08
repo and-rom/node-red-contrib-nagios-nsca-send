@@ -1,0 +1,17 @@
+{
+      "nagios-nsca-send": {
+        "label": {
+            "ncsahost": "NSCA host",
+            "nscaport": "NSCA port",
+            "hostname": "Hostname",
+            "servicename": "Service name",
+            "send_nsca": "Path to send_nsca",
+            "send_nsca_cfg": "Path to send_nsca.cfg",
+            "statusCode": "Return code",
+            "messageTxt": "Message"
+        },
+        "action": null,
+        "messages": null,
+        "errors": null
+    }
+}

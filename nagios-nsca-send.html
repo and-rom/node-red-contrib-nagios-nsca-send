@@ -1,0 +1,127 @@
+<script type="text/x-red" data-template-name="nagios-nsca-send">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+    <input type="text" id="node-input-name" placeholder="">
+  </div>
+  <div class="form-row">
+    <label for="node-input-ncsahost"><i class="fa fa-tag"></i> <span data-i18n="nagios-nsca-send.label.ncsahost"></span></label>
+    <input type="text" id="node-input-ncsahost" placeholder="127.0.0.1">
+  </div>
+  <div class="form-row">
+    <label for="node-input-nscaport"><i class="fa fa-desktop"></i> <span data-i18n="nagios-nsca-send.label.nscaport"></span></label>
+    <input type="text" id="node-input-nscaport" placeholder="5667">
+  </div>
+  <div class="form-row">
+    <label for="node-input-hostname"><i class="fa fa-rss"></i> <span data-i18n="nagios-nsca-send.label.hostname"></span></label>
+    <input type="text" id="node-input-hostname" placeholder="dummyhost">
+  </div>
+  <div class="form-row">
+    <label for="node-input-servicename"><i class="fa fa-wrench"></i> <span data-i18n="nagios-nsca-send.label.servicename"></span></label>
+    <input type="text" id="node-input-servicename" placeholder="passive service">
+  </div>
+  <div class="form-row">
+    <label for="node-input-send_nsca"><i class="fa fa-wrench"></i> <span data-i18n="nagios-nsca-send.label.send_nsca"></span></label>
+    <input type="text" id="node-input-send_nsca" placeholder="/usr/sbin/send_nsca">
+  </div>
+  <div class="form-row">
+    <label for="node-input-send_nsca_cfg"><i class="fa fa-wrench"></i> <span data-i18n="nagios-nsca-send.label.send_nsca_cfg"></span></label>
+    <input type="text" id="node-input-send_nsca_cfg" placeholder="/etc/send_nsca.cfg">
+  </div>
+  <div class="form-row">
+    <label for="node-input-statusCode"><i class="fa fa-wrench"></i> <span data-i18n="nagios-nsca-send.label.statusCode"></span></label>
+    <input type="text" id="node-input-statusCode">
+    <input type="hidden" id="node-input-statusCodeType">
+  </div>
+  <div class="form-row">
+    <label for="node-input-messageTxt"><i class="fa fa-wrench"></i> <span data-i18n="nagios-nsca-send.label.messageTxt"></span></label>
+    <input type="text" id="node-input-messageTxt">
+    <input type="hidden" id="node-input-messageTxtType">
+  </div>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('nagios-nsca-send', {
+    category: 'output',
+    color: '#E2C96C',
+    defaults: {
+      name: {
+        value: ''
+      },
+      ncsahost: {
+        value: '',
+        type: 'string',
+        required: false,
+      },
+      nscaport: {
+        value: 5667,
+        type: 'number',
+        required: false,
+      },
+      hostname: {
+        value: '',
+        type: 'string',
+        required: true,
+      },
+      servicename: {
+        value: '',
+        type: 'string',
+        required: true,
+      },
+      send_nsca: {
+        value: '/usr/sbin/send_nsca',
+        type: 'string',
+        required: true,
+      },
+      send_nsca_cfg: {
+        value: '/etc/send_nsca.cfg',
+        type: 'string',
+        required: true,
+      },
+      statusCode: {
+        value: '',
+        validate: RED.validators.typedInput("statusCodeType", false)
+      },
+      statusCodeType: {value:"num"},
+      messageTxt: {
+        value: '',
+        validate: RED.validators.typedInput("messageTxtType", false)
+      },
+      messageTxtType: {value:"str"}
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'nagios.png',
+    label: function() { return this.name || "nsca-send" },
+    paletteLabel: 'nsca',
+    labelStyle: function() { return this.name ? 'node_label_italic' : '' },
+    align: 'right',
+    oneditprepare: function() {
+        $("#node-input-statusCode").typedInput({
+            default:'num',
+            types:['num','msg','flow','global','jsonata'],
+            typeField: $("#node-input-statusCodeType")
+        });
+
+        $("#node-input-messageTxt").typedInput({
+            default:'str',
+            types:['str','msg','flow','global','jsonata'],
+            typeField: $("#node-input-messageTxtType")
+        });
+    },
+    oneditsave: function() {
+        var node = this;
+        node.name = $("#node-input-name").val();
+        node.ncsahost = $("#node-input-ncsahost").val();
+        node.nscaport= $("#node-input-nscaport").val();
+        node.hostname = $("#node-input-hostname").val();
+        node.servicename = $("#node-input-servicename").val();
+        node.send_nsca = $("#node-input-send_nsca").val();
+        node.send_nsca_cfg = $("#node-input-send_nsca_cfg").val();
+        node.statusCode = $("#node-input-statusCode").val();
+        node.messageTxt = $("#node-input-messageTxt").val();
+    },
+    oneditresize: function(size) {
+
+    }
+  });
+</script>
