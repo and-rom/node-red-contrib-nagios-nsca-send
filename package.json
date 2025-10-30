@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-nagios-nsca-send",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "description": "Coming soon",
     "main": "nagios-nsca-send.js",
     "scripts": {
