@@ -37,6 +37,10 @@
     <input type="text" id="node-input-messageTxt">
     <input type="hidden" id="node-input-messageTxtType">
   </div>
+  <div class="form-row">
+    <label for="node-input-debug"><i class="fa fa-bug"></i> <span data-i18n="nagios-nsca-send.label.debug"></span></label>
+    <input type="checkbox" id="node-input-debug">
+  </div>
 </script>
 
 <script type="text/javascript">
@@ -86,7 +90,10 @@ RED.nodes.registerType('nagios-nsca-send', {
         value: '',
         validate: RED.validators.typedInput("messageTxtType", false)
       },
-      messageTxtType: {value:"str"}
+      messageTxtType: {value:"str"},
+      debug: {
+        value: false
+      }
     },
     inputs: 1,
     outputs: 0,

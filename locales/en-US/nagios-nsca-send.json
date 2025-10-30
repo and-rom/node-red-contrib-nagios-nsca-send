@@ -8,7 +8,8 @@
             "send_nsca": "Path to send_nsca",
             "send_nsca_cfg": "Path to send_nsca.cfg",
             "statusCode": "Return code",
-            "messageTxt": "Message"
+            "messageTxt": "Message",
+            "debug": "Debug"
         },
         "action": null,
         "messages": null,

@@ -17,12 +17,13 @@ module.exports = function(RED) {
         node.statusCodeType = config.statusCodeType || "num";
         node.messageTxt = config.messageTxt || "UNKNOWN";
         node.messageTxtType = config.messageTxtType || "str";
+        node.debug = config.debug || false;
 
         this.on('input', function(msg, send, done) {
 
         // Get the value by the type of source and return it.
         function getValue(type, value) {
-            console.log("type = " + type + ", value = " + value);
+            if (node.debug) console.log("type = " + type + ", value = " + value);
             switch (type) {
                 case 'str' :
                 case 'num' :
@@ -51,7 +52,7 @@ module.exports = function(RED) {
                           + " -H " + node.ncsahost
                           + " -p " + node.nscaport
                           + " -c " + node.send_nsca_cfg;
-            console.log( "statusCode = " + getValue(node.statusCodeType, node.statusCode) );
+            if (node.debug) console.log( "statusCode = " + getValue(node.statusCodeType, node.statusCode) );
             var statusCode = parseInt(getValue(node.statusCodeType, node.statusCode));
                 statusCode = isNaN(statusCode) ? 3 : statusCode;
             var messageTxt = getValue(node.messageTxtType, node.messageTxt) || "UNKNOWN";
@@ -66,14 +67,14 @@ module.exports = function(RED) {
             // compose the whole command to be executed.
             var wholecommand = "/bin/echo -e \"" + nsca_msg + "\" | " + command;
 
-            console.log( "wholecommand = " + wholecommand );
+            if (node.debug) console.log( "wholecommand = " + wholecommand );
 
             // execute the command
             exec( wholecommand, function (error, stdout, stderr) {
                 // process the returned values
                 if (error !== null) {
                     // errors will be printed
-                    console.log("exec error: " + error);
+                    if (node.debug) console.log("exec error: " + error);
                 }
                 if (stdout !== "" && stdout !== null) {
                     // if the return on stdout is not the expected default text, print it as a warning
